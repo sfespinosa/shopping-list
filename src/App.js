@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -33,36 +33,28 @@ const App = () => {
   
   const handleCompletion = (key) => {
     const newItems = [...items]
-    newItems[key] = {...newItems[key], 
-      completed: !newItems[key].completed
-    }
+    newItems[key].completed = !newItems[key].completed
     setItems(newItems)
   }
 
   const toggleDecrease = key => {
     const newItems = [...items]
     if (newItems[key].quantity > 1) {
-      newItems[key] = {...newItems[key], 
-        quantity: newItems[key].quantity - 1
-      }
+      newItems[key].quantity--
     }
     setItems(newItems)
   }
 
   const toggleIncrease = key => {
     const newItems = [...items]
-    newItems[key] = {...newItems[key], 
-      quantity: newItems[key].quantity + 1
-    }
+    newItems[key].quantity++
     setItems(newItems)
   }
 
   const calculateTotal = () => {
-    let sum = 0
-    items.forEach(item => {
-      sum += item.quantity
-    })
-    return sum
+    return items.reduce((total, item) => {
+      return total + item.quantity
+    }, 0)
   }
 
 	return (

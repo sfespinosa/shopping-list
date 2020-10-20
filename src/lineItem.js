@@ -7,15 +7,15 @@ const LineItem = ({index, item, handleCompletion, increase, decrease}) => {
         <div className='item-container'>
             <div className='item-name'>
             {item.completed ? (
-                <>
-                    <FontAwesomeIcon icon={faCheckCircle} onClick={() => handleCompletion(index)}/>
+                <div onClick={() => handleCompletion(index)}>
+                    <FontAwesomeIcon icon={faCheckCircle} />
                     <span className='completed'>{item.name}</span>
-                </>
+                </div >
             ) : (
-                <>
+                <div onClick={() => handleCompletion(index)}>
                     <FontAwesomeIcon icon={faCircle} onClick={() => handleCompletion(index)}/>
                     <span>{item.name}</span>
-                </>
+                </div>
             )}
             </div>
             <div className='quantity'>
