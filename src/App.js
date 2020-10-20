@@ -26,7 +26,7 @@ const App = () => {
   const renderLineItems = () => {
     return (
       items.map((item, idx) => {
-        return <LineItem key={idx} index={idx} item={item} handleCompletion={handleCompletion}/>
+        return <LineItem key={idx} index={idx} item={item} handleCompletion={handleCompletion} decrease={toggleDecrease} increase={toggleIncrease}/>
       })
     )
   }
@@ -34,7 +34,25 @@ const App = () => {
   const handleCompletion = (key) => {
     const newItems = [...items]
     newItems[key] = {...newItems[key], 
-      completed: !items[key].completed
+      completed: !newItems[key].completed
+    }
+    setItems(newItems)
+  }
+
+  const toggleDecrease = key => {
+    const newItems = [...items]
+    if (newItems[key].quantity > 1) {
+      newItems[key] = {...newItems[key], 
+        quantity: newItems[key].quantity - 1
+      }
+    }
+    setItems(newItems)
+  }
+
+  const toggleIncrease = key => {
+    const newItems = [...items]
+    newItems[key] = {...newItems[key], 
+      quantity: newItems[key].quantity + 1
     }
     setItems(newItems)
   }

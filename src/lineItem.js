@@ -1,12 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faChevronLeft, faCircle, faCheckCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faChevronLeft, faCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
-const LineItem = ({index, item, handleCompletion}) => {
+const LineItem = ({index, item, handleCompletion, increase, decrease}) => {
     return (
         <div className='item-container'>
             <div className='item-name'>
-            {/* HINT: replace false with a boolean indicating the item has been completed or not */}
             {item.completed ? (
                 <>
                     <FontAwesomeIcon icon={faCheckCircle} onClick={() => handleCompletion(index)}/>
@@ -21,11 +20,11 @@ const LineItem = ({index, item, handleCompletion}) => {
             </div>
             <div className='quantity'>
             <button>
-                <FontAwesomeIcon icon={faChevronLeft} />
+                <FontAwesomeIcon icon={faChevronLeft} onClick={() => decrease(index)}/>
             </button>
             <span> {item.quantity} </span>
             <button>
-                <FontAwesomeIcon icon={faChevronRight} />
+                <FontAwesomeIcon icon={faChevronRight} onClick={() => increase(index)}/>
             </button>
             </div>
         </div>
