@@ -2,19 +2,19 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft, faCircle, faCheckCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const LineItem = ({item}) => {
+const LineItem = ({index, item, handleCompletion}) => {
     return (
         <div className='item-container'>
             <div className='item-name'>
             {/* HINT: replace false with a boolean indicating the item has been completed or not */}
             {item.completed ? (
                 <>
-                    <FontAwesomeIcon icon={faCheckCircle} />
+                    <FontAwesomeIcon icon={faCheckCircle} onClick={() => handleCompletion(index)}/>
                     <span className='completed'>{item.name}</span>
                 </>
             ) : (
                 <>
-                    <FontAwesomeIcon icon={faCircle} />
+                    <FontAwesomeIcon icon={faCircle} onClick={() => handleCompletion(index)}/>
                     <span>{item.name}</span>
                 </>
             )}

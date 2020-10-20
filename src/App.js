@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faChevronLeft, faCircle, faCheckCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import LineItem from './lineItem'
 
 const App = () => {
@@ -26,11 +26,19 @@ const App = () => {
   const renderLineItems = () => {
     return (
       items.map((item, idx) => {
-        return <LineItem key={idx} item={item}/>
+        return <LineItem key={idx} index={idx} item={item} handleCompletion={handleCompletion}/>
       })
     )
   }
   
+  const handleCompletion = (key) => {
+    const newItems = [...items]
+    newItems[key] = {...newItems[key], 
+      completed: !items[key].completed
+    }
+    setItems(newItems)
+  }
+
 	return (
 		<div className='app-background'>
 			<div className='main-container'>
