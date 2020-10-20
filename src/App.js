@@ -57,6 +57,14 @@ const App = () => {
     setItems(newItems)
   }
 
+  const calculateTotal = () => {
+    let sum = 0
+    items.forEach(item => {
+      sum += item.quantity
+    })
+    return sum
+  }
+
 	return (
 		<div className='app-background'>
 			<div className='main-container'>
@@ -67,7 +75,7 @@ const App = () => {
 				<div className='item-list'>
           {renderLineItems()}
 				</div>
-				<div className='total'>Total: 6</div>
+          <div className='total'>Total: {calculateTotal()}</div>
 			</div>
 		</div>
 	);
