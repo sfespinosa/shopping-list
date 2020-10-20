@@ -2,44 +2,44 @@ import React, { useState, useEffect } from 'react';
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft, faCircle, faCheckCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
+import LineItem from './lineItem'
 
 const App = () => {
-	// HINT: each "item" in our list names a name, a boolean to tell if its been completed, and a quantity
-	const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]);
+  const [newItem, setNewItem] = useState({})
 
+  const handleNewItem = (e) => {
+    setNewItem({
+      name: e.target.value, 
+      quantity: 1, 
+      completed: false
+    })
+  }
+
+  const handleAddItem = (e) => {
+    const newItems = [...items, newItem]
+    setItems(newItems)
+    let input = document.querySelector('input.add-item-input')
+    input.value = ''
+  }
+
+  const renderLineItems = () => {
+    return (
+      items.map((item, idx) => {
+        return <LineItem key={idx} item={item}/>
+      })
+    )
+  }
+  
 	return (
 		<div className='app-background'>
 			<div className='main-container'>
 				<div className='add-item-box'>
-					<input className='add-item-input' placeholder='Add an item...' />
-					<FontAwesomeIcon icon={faPlus} />
+					<input className='add-item-input' placeholder='Add an item...' onChange={handleNewItem}/>
+					<FontAwesomeIcon icon={faPlus} onClick={handleAddItem}/>
 				</div>
 				<div className='item-list'>
-					<div className='item-container'>
-						<div className='item-name'>
-							{/* HINT: replace false with a boolean indicating the item has been completed or not */}
-							{false ? (
-								<>
-									<FontAwesomeIcon icon={faCheckCircle} />
-									<span className='completed'>Item 1</span>
-								</>
-							) : (
-								<>
-									<FontAwesomeIcon icon={faCircle} />
-									<span>Item 1</span>
-								</>
-							)}
-						</div>
-						<div className='quantity'>
-							<button>
-								<FontAwesomeIcon icon={faChevronLeft} />
-							</button>
-							<span> 1 </span>
-							<button>
-								<FontAwesomeIcon icon={faChevronRight} />
-							</button>
-						</div>
-					</div>
+          {renderLineItems()}
 				</div>
 				<div className='total'>Total: 6</div>
 			</div>
